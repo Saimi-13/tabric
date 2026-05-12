@@ -53,9 +53,9 @@ export default function Nav() {
           <Image
             src="/logo.svg"
             alt="Tabric logo"
-            width={32}
-            height={32}
-            className="h-8 w-auto"
+            width={22}
+            height={22}
+            className="h-5 w-auto"
             priority
           />
           <span className="text-sm font-bold text-white dark:text-white">tabric</span>
