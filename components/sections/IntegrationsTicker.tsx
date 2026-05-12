@@ -32,14 +32,14 @@ export default function IntegrationsTicker() {
       <div className="overflow-hidden">
         <motion.div
           animate={{ x: ['0%', '-50%'] }}
-          transition={{ duration: 22, ease: 'linear', repeat: Infinity }}
-          className="flex items-center gap-12"
+          transition={{ duration: 30, ease: 'linear', repeat: Infinity }}
+          className="flex items-center gap-16"
           style={{ width: 'max-content' }}
         >
           {allTools.map((tool, i) => (
             <span
               key={i}
-              className="whitespace-nowrap text-sm font-medium text-[#7588a3]/70"
+              className="whitespace-nowrap text-[13px] font-normal text-[#7588a3]/60"
             >
               {tool}
             </span>
