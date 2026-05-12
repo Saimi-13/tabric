@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useI18n } from '@/lib/i18n'
 
 const tools = [
   'Excel',
@@ -13,15 +14,16 @@ const tools = [
   'CSV',
 ]
 
-// Duplicate for seamless loop
 const allTools = [...tools, ...tools]
 
 export default function IntegrationsTicker() {
+  const { t } = useI18n()
+
   return (
     <section className="relative overflow-hidden border-y border-white/5 py-10">
       <div className="mx-auto mb-6 max-w-7xl px-6">
         <p className="text-center text-[10px] font-semibold uppercase tracking-[0.25em] text-[#7588a3]/60">
-          Works Seamlessly With Your Data Tools
+          {t.ticker}
         </p>
       </div>
 

@@ -2,8 +2,11 @@
 
 import { motion } from 'framer-motion'
 import { Mail, ExternalLink } from 'lucide-react'
+import { useI18n } from '@/lib/i18n'
 
 export default function Contact() {
+  const { t } = useI18n()
+
   return (
     <section id="contact" className="relative px-6 py-24 md:py-28">
       <div className="pointer-events-none absolute inset-0 bg-[#191f2e]/20" />
@@ -16,7 +19,6 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="relative overflow-hidden rounded-2xl border border-white/8 bg-[#191f2e] p-10 text-center"
         >
-          {/* Top glow */}
           <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-b from-[#31c4d8]/6 to-transparent" />
 
           <div className="relative">
@@ -24,21 +26,16 @@ export default function Contact() {
               <Mail size={24} className="text-[#31c4d8]" />
             </div>
 
-            <h2 className="mb-4 text-2xl font-black text-white">
-              Get in Touch
-            </h2>
-            <p className="mb-8 text-sm leading-relaxed text-[#7588a3]">
-              Have questions about Tabric, want a custom demo, or interested in
-              enterprise pricing? We&apos;d love to hear from you.
-            </p>
+            <h2 className="mb-4 text-2xl font-black text-white">{t.contact.h2}</h2>
+            <p className="mb-8 text-sm leading-relaxed text-[#7588a3]">{t.contact.body}</p>
 
             <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
               <a
-                href="mailto:hello@tabric.com"
+                href={`mailto:${t.contact.email}`}
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-[#31c4d8]/30 bg-[#31c4d8]/8 px-5 py-2.5 text-sm font-medium text-[#31c4d8] transition-colors hover:border-[#31c4d8]/50 hover:bg-[#31c4d8]/15"
               >
                 <Mail size={14} />
-                hello@tabric.com
+                {t.contact.email}
               </a>
               <a
                 href="https://linkedin.com"
@@ -47,7 +44,7 @@ export default function Contact() {
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/4 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/8"
               >
                 <ExternalLink size={14} />
-                LinkedIn
+                {t.contact.linkedin}
               </a>
             </div>
           </div>

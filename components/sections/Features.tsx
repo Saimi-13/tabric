@@ -2,47 +2,20 @@
 
 import { motion } from 'framer-motion'
 import { Zap, Shield, Globe, MessageSquare, BarChart2, RefreshCw } from 'lucide-react'
+import { useI18n } from '@/lib/i18n'
 
-const features = [
-  {
-    icon: Zap,
-    title: 'Instant Setup',
-    body: 'No code, no configuration. Upload and get results in seconds.',
-    color: '#fbbf24',
-  },
-  {
-    icon: Shield,
-    title: 'Enterprise Security',
-    body: 'Your data is encrypted in transit and at rest. SOC-2 ready.',
-    color: '#31c4d8',
-  },
-  {
-    icon: Globe,
-    title: 'Multi-Language',
-    body: 'Insights in English, Arabic, and more. Built for global teams.',
-    color: '#c084fc',
-  },
-  {
-    icon: MessageSquare,
-    title: 'AI Chatbot',
-    body: 'Ask questions about your data in plain language. Get instant answers.',
-    color: '#31c4d8',
-  },
-  {
-    icon: BarChart2,
-    title: 'Auto Dashboards',
-    body: 'Visualizations generated automatically — no chart-building required.',
-    color: '#f97316',
-  },
-  {
-    icon: RefreshCw,
-    title: 'Live Updates',
-    body: 'Re-upload anytime. Your dashboard refreshes with new data instantly.',
-    color: '#4ade80',
-  },
+const FEATURE_META = [
+  { icon: Zap, color: '#fbbf24', titleKey: 'f1title' as const, bodyKey: 'f1body' as const },
+  { icon: Shield, color: '#31c4d8', titleKey: 'f2title' as const, bodyKey: 'f2body' as const },
+  { icon: Globe, color: '#c084fc', titleKey: 'f3title' as const, bodyKey: 'f3body' as const },
+  { icon: MessageSquare, color: '#31c4d8', titleKey: 'f4title' as const, bodyKey: 'f4body' as const },
+  { icon: BarChart2, color: '#f97316', titleKey: 'f5title' as const, bodyKey: 'f5body' as const },
+  { icon: RefreshCw, color: '#4ade80', titleKey: 'f6title' as const, bodyKey: 'f6body' as const },
 ]
 
 export default function Features() {
+  const { t } = useI18n()
+
   return (
     <section id="features" className="relative px-6 py-24 md:py-32">
       <div className="mx-auto max-w-5xl">
@@ -52,7 +25,7 @@ export default function Features() {
           viewport={{ once: true }}
           className="mb-4 text-center text-[10px] font-semibold uppercase tracking-[0.25em] text-[#31c4d8]"
         >
-          Everything You Need
+          {t.features.overline}
         </motion.p>
 
         <motion.h2
@@ -62,17 +35,18 @@ export default function Features() {
           transition={{ delay: 0.1 }}
           className="mb-16 text-center text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl"
         >
-          The fastest path from{' '}
-          <span className="text-[#31c4d8]">CSV</span> to{' '}
-          <span className="gradient-text-teal-purple">clarity.</span>
+          {t.features.h2a}{' '}
+          <span className="text-[#31c4d8]">{t.features.h2b}</span>{' '}
+          {t.features.h2c}{' '}
+          <span className="gradient-text-teal-purple">{t.features.h2d}</span>
         </motion.h2>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-          {features.map((f, i) => {
+          {FEATURE_META.map((f, i) => {
             const Icon = f.icon
             return (
               <motion.div
-                key={f.title}
+                key={f.titleKey}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -85,10 +59,8 @@ export default function Features() {
                 >
                   <Icon size={18} style={{ color: f.color }} />
                 </div>
-                <h3 className="mb-2 text-sm font-bold text-white">{f.title}</h3>
-                <p className="text-sm leading-relaxed text-[#7588a3]">
-                  {f.body}
-                </p>
+                <h3 className="mb-2 text-sm font-bold text-white">{t.features[f.titleKey]}</h3>
+                <p className="text-sm leading-relaxed text-[#7588a3]">{t.features[f.bodyKey]}</p>
               </motion.div>
             )
           })}

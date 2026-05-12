@@ -5,26 +5,26 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* Tabric design tokens */
-  --color-background: #080c16;
-  --color-foreground: #ffffff;
-  --color-card: #191f2e;
-  --color-card-foreground: #ffffff;
-  --color-popover: #191f2e;
-  --color-popover-foreground: #ffffff;
-  --color-primary: #31c4d8;
-  --color-primary-foreground: #080c16;
-  --color-secondary: #252a37;
-  --color-secondary-foreground: #ffffff;
-  --color-muted: #252a37;
-  --color-muted-foreground: #7588a3;
-  --color-accent: #fbbf24;
-  --color-accent-foreground: #080c16;
-  --color-destructive: #f37272;
-  --color-destructive-foreground: #ffffff;
-  --color-border: rgba(37, 42, 55, 0.6);
-  --color-input: #252a37;
-  --color-ring: #31c4d8;
+  /* Reference CSS custom props so dark/light switching works */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
 
   /* Chart colors */
   --color-chart-1: #31c4d8;
@@ -53,8 +53,32 @@
   --font-mono: ui-monospace, monospace;
 }
 
-/* Scrollbar */
+/* Light mode (default :root) */
 :root {
+  --background: #f0f4f8;
+  --foreground: #080c16;
+  --card: #ffffff;
+  --card-foreground: #080c16;
+  --popover: #ffffff;
+  --popover-foreground: #080c16;
+  --primary: #31c4d8;
+  --primary-foreground: #080c16;
+  --secondary: #e2e8f0;
+  --secondary-foreground: #080c16;
+  --muted: #e2e8f0;
+  --muted-foreground: #4a5568;
+  --accent: #fbbf24;
+  --accent-foreground: #080c16;
+  --destructive: #f37272;
+  --destructive-foreground: #ffffff;
+  --border: rgba(8, 12, 22, 0.1);
+  --input: #e2e8f0;
+  --ring: #31c4d8;
+  --radius: 1rem;
+}
+
+/* Dark mode */
+html.dark {
   --background: #080c16;
   --foreground: #ffffff;
   --card: #191f2e;
@@ -70,10 +94,24 @@
   --accent: #fbbf24;
   --accent-foreground: #080c16;
   --destructive: #f37272;
+  --destructive-foreground: #ffffff;
   --border: rgba(37, 42, 55, 0.6);
   --input: #252a37;
   --ring: #31c4d8;
   --radius: 1rem;
+}
+
+/* Light mode arbitrary color overrides for inline hardcoded values */
+html.light [class*="bg-[#080c16]"] { background-color: #f0f4f8 !important; }
+html.light [class*="bg-[#191f2e]"] { background-color: #ffffff !important; }
+html.light [class*="bg-[#0f1524]"] { background-color: #f8fafc !important; }
+html.light [class*="bg-[#141929]"] { background-color: #eef2f7 !important; }
+html.light [class*="text-white"] { color: #080c16 !important; }
+html.light [class*="text-[#7588a3]"] { color: #4a5568 !important; }
+html.light [class*="border-white/5"],
+html.light [class*="border-white/8"] { border-color: rgba(0,0,0,0.08) !important; }
+html.light .hero-glow {
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(49,196,216,0.1) 0%, rgba(192,132,252,0.06) 50%, transparent 100%);
 }
 
 @layer base {

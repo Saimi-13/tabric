@@ -3,8 +3,10 @@
 import { motion } from 'framer-motion'
 import { Play, ArrowRight, Sparkles, ChevronDown } from 'lucide-react'
 import { fadeUp } from '@/lib/motion'
+import { useI18n } from '@/lib/i18n'
 
 export default function Hero() {
+  const { t } = useI18n()
   return (
     <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pb-16 pt-20">
       {/* Background glows */}
@@ -22,7 +24,7 @@ export default function Hero() {
           className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#31c4d8]/20 bg-[#31c4d8]/10 px-4 py-2 text-xs font-medium text-[#31c4d8]"
         >
           <Sparkles size={12} />
-          AI-Powered Business Analytics
+          {t.hero.badge}
         </motion.div>
 
         {/* Headline */}
@@ -33,8 +35,8 @@ export default function Hero() {
           animate="show"
           className="mb-6 text-5xl font-black leading-[1.05] tracking-tight text-white sm:text-6xl md:text-[80px]"
         >
-          Your data tells a{' '}
-          <span className="gradient-text-teal-purple">story.</span>
+          {t.hero.h1a}{' '}
+          <span className="gradient-text-teal-purple">{t.hero.h1b}</span>
         </motion.h1>
 
         {/* Subtext */}
@@ -45,11 +47,12 @@ export default function Hero() {
           animate="show"
           className="mb-10 max-w-xl text-base leading-relaxed text-[#7588a3] sm:text-lg"
         >
-          Upload a spreadsheet. Get{' '}
-          <span className="font-semibold text-[#31c4d8]">dashboards</span>,{' '}
-          <span className="font-semibold text-[#f97316]">insights</span>, and an{' '}
-          <span className="font-semibold text-[#31c4d8]">AI chatbot</span> — in
-          under a minute.
+          {t.hero.sub1}{' '}
+          <span className="font-semibold text-[#31c4d8]">{t.hero.sub2}</span>,{' '}
+          <span className="font-semibold text-[#f97316]">{t.hero.sub3}</span>,{' '}
+          {t.hero.sub4}{' '}
+          <span className="font-semibold text-[#31c4d8]">{t.hero.sub5}</span>{' '}
+          {t.hero.sub6}
         </motion.p>
 
         {/* CTAs */}
@@ -65,13 +68,13 @@ export default function Hero() {
             className="inline-flex items-center gap-2 rounded-full bg-[#31c4d8] px-6 py-3 text-sm font-semibold text-[#080c16] transition-colors hover:bg-[#31c4d8]/90"
           >
             <Play size={14} fill="currentColor" />
-            Try the Demo
+            {t.hero.ctaPrimary}
           </a>
           <a
             href="#cta"
             className="inline-flex items-center gap-2 rounded-full border border-white/10 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-white/5"
           >
-            Get Early Access
+            {t.hero.ctaSecondary}
             <ArrowRight size={14} />
           </a>
         </motion.div>
@@ -85,7 +88,7 @@ export default function Hero() {
           className="mt-16 flex flex-col items-center gap-2"
         >
           <span className="text-[10px] uppercase tracking-[0.2em] text-[#7588a3]/60">
-            Scroll
+            {t.hero.scroll}
           </span>
           <motion.div
             animate={{ y: [0, 6, 0] }}

@@ -3,10 +3,10 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, Check } from 'lucide-react'
-
-const perks = ['No credit card', 'Free during beta', 'Cancel anytime']
+import { useI18n } from '@/lib/i18n'
 
 export default function CTA() {
+  const { t } = useI18n()
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
 
@@ -15,9 +15,10 @@ export default function CTA() {
     if (email) setSubmitted(true)
   }
 
+  const perks = [t.cta.perk1, t.cta.perk2, t.cta.perk3]
+
   return (
     <section id="cta" className="relative overflow-hidden px-6 py-28 md:py-36">
-      {/* Radial glows */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#191f2e]/60 via-transparent to-transparent" />
       <div className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c084fc]/6 blur-[140px]" />
       <div className="pointer-events-none absolute left-1/2 top-1/3 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#31c4d8]/5 blur-[120px]" />
@@ -30,10 +31,10 @@ export default function CTA() {
           transition={{ duration: 0.6 }}
           className="mb-5 text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl"
         >
-          Ready to stop{' '}
-          <span className="gradient-text-amber-teal">burning hours</span>
+          {t.cta.h2a}{' '}
+          <span className="gradient-text-amber-teal">{t.cta.h2b}</span>
           <br className="hidden sm:block" />
-          <span className="gradient-text-teal-purple"> on spreadsheets?</span>
+          <span className="gradient-text-teal-purple"> {t.cta.h2c}</span>
         </motion.h2>
 
         <motion.p
@@ -43,8 +44,7 @@ export default function CTA() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mb-10 text-sm text-[#7588a3] sm:text-base"
         >
-          Join the waitlist and be the first to experience Tabric when we
-          launch.
+          {t.cta.sub}
         </motion.p>
 
         {submitted ? (
@@ -56,12 +56,8 @@ export default function CTA() {
             <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#31c4d8]/15">
               <Check size={24} className="text-[#31c4d8]" />
             </div>
-            <p className="text-base font-semibold text-white">
-              You&apos;re on the list!
-            </p>
-            <p className="text-sm text-[#7588a3]">
-              We&apos;ll reach out when Tabric launches.
-            </p>
+            <p className="text-base font-semibold text-white">{t.cta.successTitle}</p>
+            <p className="text-sm text-[#7588a3]">{t.cta.successSub}</p>
           </motion.div>
         ) : (
           <motion.form
@@ -74,7 +70,7 @@ export default function CTA() {
           >
             <input
               type="email"
-              placeholder="Enter your email"
+              placeholder={t.cta.emailPlaceholder}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -85,13 +81,12 @@ export default function CTA() {
               type="submit"
               className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#31c4d8] px-6 text-sm font-semibold text-[#080c16] transition-colors hover:bg-[#31c4d8]/90"
             >
-              Get Early Access
+              {t.cta.button}
               <ArrowRight size={15} />
             </button>
           </motion.form>
         )}
 
-        {/* Perks */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -100,10 +95,7 @@ export default function CTA() {
           className="flex flex-wrap items-center justify-center gap-5"
         >
           {perks.map((perk) => (
-            <span
-              key={perk}
-              className="flex items-center gap-1.5 text-xs text-[#7588a3]"
-            >
+            <span key={perk} className="flex items-center gap-1.5 text-xs text-[#7588a3]">
               <Check size={12} className="text-[#31c4d8]" />
               {perk}
             </span>
