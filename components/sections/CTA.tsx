@@ -9,10 +9,31 @@ export default function CTA() {
   const { t } = useI18n()
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (email) setSubmitted(true)
+    if (!email || submitting) return
+    setSubmitting(true)
+    setError(null)
+    try {
+      const res = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        setError(data.error ?? 'Something went wrong')
+        return
+      }
+      setSubmitted(true)
+    } catch {
+      setError('Network error — please try again')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const perks = [t.cta.perk1, t.cta.perk2, t.cta.perk3]
@@ -79,12 +100,16 @@ export default function CTA() {
             />
             <button
               type="submit"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#31c4d8] px-6 text-sm font-semibold text-[#080c16] transition-colors hover:bg-[#31c4d8]/90"
+              disabled={submitting}
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#31c4d8] px-6 text-sm font-semibold text-[#080c16] transition-colors hover:bg-[#31c4d8]/90 disabled:opacity-60"
             >
-              {t.cta.button}
+              {submitting ? '…' : t.cta.button}
               <ArrowRight size={15} />
             </button>
           </motion.form>
+        )}
+        {error && !submitted && (
+          <p className="-mt-2 mb-6 text-xs text-[#f37272]">{error}</p>
         )}
 
         <motion.div

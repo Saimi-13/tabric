@@ -17,6 +17,14 @@ export const metadata: Metadata = {
     title: 'Tabric — Turn spreadsheets into stories',
     description:
       'Upload a spreadsheet. Get dashboards, insights, and an AI chatbot — in under a minute.',
+    type: 'website',
+    siteName: 'Tabric',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Tabric — Turn spreadsheets into stories',
+    description:
+      'Upload a spreadsheet. Get dashboards, insights, and an AI chatbot — in under a minute.',
   },
 }
 
